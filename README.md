@@ -8,6 +8,12 @@ Python Version = 3.13.5 (Recommend to upgrade the python if lower is installed)
 
 Visit Python website to upgrade the python
 
+### Virtual Environment
+
+```bash
+python -m venv env
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
