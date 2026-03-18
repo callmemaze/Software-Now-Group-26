@@ -17,7 +17,7 @@ def is_strong_password(password: str) -> str:
     if not re.search(r'[^A-Za-z0-9]', password):
         return False
     return True """
-    return "True"
+    return "False"
 
 if __name__ == "__main__":
     password = input("Enter a password: ")
