@@ -32,7 +32,7 @@ def get_intput(prompt: str, min_value: int = None, max_value: int = None) -> int
             value = int(input(prompt))
             if (min_value is not None and value < min_value) or \
                (max_value is not None and value > max_value):
-                print(f"Value must be between {min_value} and {max_value}. Please try again.")
+                print(f"Scores must be between {min_value} and {max_value}. Please try again.")
                 continue
             return value
         except ValueError:
@@ -66,11 +66,19 @@ def score_statistics() -> tuple[float, Student, Student]:
 
 def students_grade_calculator() -> list[Student]:
     """ Code for question 3 goes here """
-    num_students = get_intput("Enter the number of students: ", min_value=3, max_value=10)
+    num_students = get_intput("Enter the number of students (3 to 10): ", min_value=3, max_value=10)
     students: list[Student] = []
     for _ in range(1, num_students + 1):
-        name = input(f"Enter the name of student {_}: ").strip()
-        score = get_intput(f"Enter the score of {name}: ", min_value=0, max_value=100)
+        while True:
+            name = input(f"Enter the name of student {_}: ").strip()
+            if not name:
+                print("Name cannot be blank.")
+                continue
+            if not all(c.isalpha() or c.isspace() for c in name):
+                print("Name cannot be empty and must contain only letters. Please try again.")
+                continue
+            break
+        score = get_intput(f"Enter the score of {name} (0 to 100): ", min_value=0, max_value=100)
         grade = calculate_grade(score)
         students.append(Student(name=name, score=score, grade=grade))
     return students
