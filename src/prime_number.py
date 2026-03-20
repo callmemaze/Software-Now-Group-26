@@ -1,33 +1,67 @@
+"""
+Prime Number Analyzer (HD+)
 
-def find_all_prime_numbers(user_input: str) -> str:
-    prime_no=[]
+Finds all prime numbers up to a user-defined limit (max 100)
+and displays key statistics.
 
-    for x in range(2, user_input + 1):      # Loop through numbers from 2 to given number
-        is_prime = True
-        for y in range (2, int(x**0.5) + 1):        #to check whether the number is prime or not
-            if x % y == 0:
-                is_prime = False
-                break
+"""
 
-        if is_prime:
-            prime_no.append(x)              #add the prime number to the list 
+from math import isqrt
 
-    if not prime_no:
-        return "No prime numbers found."
-    
-    Result=""
-    Result += "Total prime numbers found: "+" ".join(map(str, prime_no)) + "\n"
-    Result += "Total primes found: " + str(len(prime_no)) + "\n"
-    Result += "Largest prime: " + str(max(prime_no)) + "\n"
-    Result += "Smallest prime: " + str(min(prime_no)) + "\n"
-    Result += "Sum of all primes: " + str(sum(prime_no))
-   
-    return Result
+
+def get_limit() -> int:
+    """Get a valid integer input between 0 and 100."""
+    while True:
+        try:
+            value = int(input("Enter a number (1–100): "))
+            if 1 <= value <= 100:
+                return value
+            print("❌ Error: Number must be between 1 and 100.")
+        except ValueError:
+            print("❌ Error: Please enter a valid integer.")
+
+
+def sieve_primes(limit: int) -> list[int]:
+    """
+    Generate prime numbers using the Sieve of Eratosthenes.
+    More efficient and professional than basic checking.
+    """
+    if limit < 2:
+        return []
+    sieve = [True] * (limit + 1)
+    sieve[0:2] = [False, False]
+    for i in range(2, isqrt(limit) + 1):
+        if sieve[i]:
+            for multiple in range(i * i, limit + 1, i):
+                sieve[multiple] = False
+
+    return [i for i, is_prime in enumerate(sieve) if is_prime]
+
+def calculate_statistics(primes: list[int]) -> dict:
+    """Return statistics as a dictionary for clarity."""
+    return {
+        "count": len(primes),
+        "smallest": primes[0] if primes else None,
+        "largest": primes[-1] if primes else None,
+        "sum": sum(primes)
+    }
+
+def display_results(primes: list[int]) -> None:
+    """Display results in a clean, formatted output."""
+    stats = calculate_statistics(primes)
+
+    print("\n📊 Prime Number Analysis")
+    print("=" * 45)
+
+    primes_str = " ".join(map(str, primes)) if primes else "None"
+    print(f"{'Prime numbers found:':<25} {primes_str}")
+    print(f"{'Total primes found:':<25} {stats['count']}")
+    print(f"{'Smallest prime:':<25} {stats['smallest'] if stats['smallest'] is not None else 'N/A'}")
+    print(f"{'Largest prime:':<25} {stats['largest'] if stats['largest'] is not None else 'N/A'}")
+    print(f"{'Sum of all primes:':<25} {stats['sum']}")
+
 
 if __name__ == "__main__":
-    user_input = int(input("Enter a number (between 2 to max 100): "))
-
-    if user_input > 100:
-        print("Please enter a number less than or equal to 100.")
-    else:
-        print(find_all_prime_numbers(user_input))       #call and print the function
+    limit = get_limit()
+    primes = sieve_primes(limit)
+    display_results(primes)
