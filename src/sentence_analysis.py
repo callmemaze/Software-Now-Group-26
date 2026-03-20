@@ -12,6 +12,7 @@ Aurther - Aryan
 
 """
 
+import re
 import string
 
 
@@ -41,7 +42,8 @@ def clean_words(sentence):
     cleaned = []
     for word in words:
         w = word.strip(string.punctuation)
-        if w and not w.isdigit(): # Ignore numbers
+        w = re.sub(r"\d+", "", w)
+        if w: # Ignore numbers
             cleaned.append(w)
     return cleaned
 
