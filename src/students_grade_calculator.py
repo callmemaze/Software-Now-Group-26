@@ -17,7 +17,9 @@ class Student:
     score: int 
     grade: str = ""
     
-
+"""
+    Prompt user until a valid non-empty input is entered.
+"""
 def get_input(prompt: str, min_value: int = None, max_value: int = None) -> int: # type: ignore
     while True:
         try:
@@ -30,6 +32,7 @@ def get_input(prompt: str, min_value: int = None, max_value: int = None) -> int:
         except ValueError:
             print("❌ Error: Invalid input. Please enter an integer.")
 
+""" Calculate_grade returns the grade based on the score using the defined thresholds. """
 def calculate_grade(score: int) -> str:
     if score >= 85:
         return "HD"
@@ -56,6 +59,8 @@ def score_statistics(students: list[Student]) -> tuple[float, Student, Student]:
     lowest = min(students, key=lambda s: s.score)
     return average, highest, lowest
 
+
+""" Main function to calculate student grades and display results. """
 def students_grade_calculator() -> list[Student]:
     """ Code for question 3 goes here """
     num_students = get_input("Enter the number of students (3 to 10): ", min_value=3, max_value=10)
@@ -75,6 +80,8 @@ def students_grade_calculator() -> list[Student]:
         students.append(Student(name=name, score=score, grade=grade))
     return students
 
+
+"""   Displays the results in a formatted table and class summary."""
 def display_results(students: list[Student]):
     stats = score_statistics(students)
 
