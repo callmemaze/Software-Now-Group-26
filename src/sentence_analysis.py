@@ -8,6 +8,8 @@ This program:
 - Displays multiple case transformations
 - Displays the reversed sentence
 
+Aurther - Aryan 
+
 """
 
 import string
