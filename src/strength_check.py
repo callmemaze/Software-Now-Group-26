@@ -8,6 +8,13 @@ Features:
 • Dictionary word detection
 • Password cracking time estimation
 
+Group Name: Sydney Group 26
+Group Members:
+Dipesh Shrestha - S394865
+Aryan Shrestha - S396160
+Priyanka Shakya - S396306
+Nahida Aktar - S391730
+
 """
 
 import re
