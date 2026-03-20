@@ -1,8 +1,15 @@
 """
-Prime Number Analyzer (HD+)
+Prime Number Analyzer 
 
 Finds all prime numbers up to a user-defined limit (max 100)
 and displays key statistics.
+
+Group Name: Sydney Group 26
+Group Members:
+Dipesh Shrestha - S394865
+Aryan Shrestha - S396160
+Priyanka Shakya - S396306
+Nahida Aktar - S391730
 
 """
 
