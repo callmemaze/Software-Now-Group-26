@@ -36,11 +36,11 @@ def clean_words(sentence):
     words = sentence.split()
 
     # Remove punctuation from each word
-    cleaned = [
-        word.strip(string.punctuation)
-        for word in words
-        if word.strip(string.punctuation)
-    ]
+    cleaned = []
+    for word in words:
+        w = word.strip(string.punctuation)
+        if w and not w.isdigit(): # Ignore numbers
+            cleaned.append(w)
     return cleaned
 
 def count_words(words):
